@@ -1,0 +1,24 @@
+# .NET
+bin
+obj
+*.suo
+*.user
+_ReSharper.*
+*.pidb
+*.pdb
+*.idb
+*.nupkg
+*.lock.json
+
+# JavaScript
+node_modules
+jspm_packages
+bower_components
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
