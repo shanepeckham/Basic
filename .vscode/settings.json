@@ -2,6 +2,9 @@
     "files.exclude": {
         "**/bin": true,
         "**/obj": true,
+        "**/bower_components": true,
+        "**/node_modules": true,
+        "**/jspm_packages": true,
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,

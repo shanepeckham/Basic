@@ -15,6 +15,9 @@ node_modules
 jspm_packages
 bower_components
 
+# Web
+wwwroot
+
 # OS generated files #
 ######################
 .DS_Store
