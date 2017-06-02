@@ -22,6 +22,11 @@ gulp.task("default", () => {
     runSequence("printConfig", "build", ["watch", "dotnet"]);
 });
 
+gulp.task("webonly", () => {
+    runSequence("printConfig", "build", "watch");
+});
+
+
 export default {
     get config() {
         return config;
