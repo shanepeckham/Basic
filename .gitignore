@@ -9,6 +9,7 @@ _ReSharper.*
 *.idb
 *.nupkg
 *.lock.json
+*.userprefs
 
 # JavaScript
 node_modules
