@@ -49,6 +49,7 @@ namespace Web
                         w.PathsToNamespaces.Add("", baseNamespace);
 
                         w.NamespaceMapper.Add($"{baseNamespace}.**.", "Concepts.**.");
+                        w.NamespaceMapper.Add($"{baseNamespace}.**.", "Domain.**.");
                         w.NamespaceMapper.Add($"{baseNamespace}.**.", "Read.**.");
                         w.NamespaceMapper.Add($"{baseNamespace}.**.", "Events.**.");
                         w.NamespaceMapper.Add($"{baseNamespace}.**.", $"{baseNamespace}.**.");
