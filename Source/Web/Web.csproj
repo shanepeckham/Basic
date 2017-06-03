@@ -1,6 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <DefaultItemExcludes>gulp\**\*;node_modules\**\*;jspm_packages\**\*;bower_components\**\*;wwwroot\**\*;bin\**\*;obj\**\*</DefaultItemExcludes>
+  </PropertyGroup>
   <ItemGroup>
+    <Content Remove="node_modules\**\*"/>
+    <Content Remove="jspm_packages\**\*"/>
+    <Content Remove="bower_components\**\*"/>
+    <Content Remove="bin\**\*"/>
+    <Content Remove="obj\**\*"/>
+    <Content Remove="wwwroot\**\*"/>
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Read\Read.csproj" />
     <ProjectReference Include="..\Events\Events.csproj" />
@@ -17,8 +28,4 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0-*" />
   </ItemGroup>
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
-  </PropertyGroup>
 </Project>

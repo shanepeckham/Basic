@@ -1,11 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard1.6</TargetFramework>
+        <DefaultItemExcludes>bin\**\*;obj\**\*</DefaultItemExcludes>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="doLittle" Version="2.0.0-*" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Remove="bin\**\*"/>
+        <Content Remove="obj\**\*"/>
+        <PackageReference Include="doLittle" Version="2.0.0-*" />
+    </ItemGroup>
 
 </Project>

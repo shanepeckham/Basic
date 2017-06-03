@@ -2,13 +2,21 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "0.1.0",
-    "command": "dotnet",
     "isShellCommand": true,
     "args": [],
     "tasks": [
         {
             "taskName": "build",
-            "args": [ ],
+            "command": "dotnet",
+            "args": ["build", "${workspaceRoot}/Source/Web" ],
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "build current",
+            "command": "dotnet",
+            "args": ["build", "${workspaceRoot}/Source/Web", "--no-dependencies" ],
             "isBuildCommand": true,
             "showOutput": "always",
             "problemMatcher": "$msCompile"
