@@ -7,8 +7,8 @@
     "tasks": [
         {
             "taskName": "build",
-            "command": "dotnet",
-            "args": ["build", "${workspaceRoot}/Source/Web" ],
+            "command": "msbuild",
+            "args": ["/v:m", "${workspaceRoot}/Source/Web" ],
             "isBuildCommand": true,
             "showOutput": "always",
             "problemMatcher": "$msCompile"
