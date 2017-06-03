@@ -1,4 +1,4 @@
-using doLittle.Configuration;
+﻿using doLittle.Configuration;
 using doLittle.Execution;
 using doLittle.StructureMap;
 

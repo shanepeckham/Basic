@@ -1,4 +1,4 @@
-import gulp from "gulp";
+﻿import gulp from "gulp";
 import config from "../config";
 import runSequence from "run-sequence";
 import "./html";
@@ -23,7 +23,7 @@ gulp.task("default", () => {
 });
 
 gulp.task("webonly", () => {
-    runSequence("printConfig", "build", "watch");
+    runSequence("printConfig", ["html", "javascript", "less", "staticContent"], "watch");
 });
 
 

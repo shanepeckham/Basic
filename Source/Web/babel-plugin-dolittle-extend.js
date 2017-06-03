@@ -1,4 +1,4 @@
-module.exports = function ({ types: t }) {
+﻿module.exports = function ({ types: t }) {
     return {
         visitor: {
             Class(path) {
@@ -35,12 +35,24 @@ module.exports = function ({ types: t }) {
                 var namespace = "Web";
                 var filename = this.file.log.filename.substr(process.cwd().length);
 
+                console.log("Filename : "+filename);
+
 
                 if (filename.lastIndexOf("/") > 0) {
                     var filePath = filename.substr(0, filename.lastIndexOf("/"));
                     filePath = filePath.split("/").join(".");
                     namespace = "Web." + filePath;
                 }
+
+                if (filename.lastIndexOf("\\") > 0) {
+                    var filePath = filename.substr(0, filename.lastIndexOf("\\"));
+                    filePath = filePath.split("\\").join(".");
+                    if( filePath.indexOf(".") == 0 ) filePath = filePath.substr(1);
+                    namespace = "Web." + filePath;
+                }
+
+
+                console.log("Namespace : "+namespace);
 
                 var target = path;
                 if (path.parentPath.node.type == "ExportNamedDeclaration") target = path.parentPath;

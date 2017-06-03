@@ -1,4 +1,4 @@
-import gulp from "gulp";
+﻿import gulp from "gulp";
 import gulp_jspm from "gulp-jspm";
 import util from "gulp-util";
 import sourcemaps from "gulp-sourcemaps";
@@ -23,7 +23,7 @@ export function javaScriptPipeline(stream)
         .pipe(babel({
             presets: ["es2015"],
             plugins: [
-                "./babel-plugin-dolittle-extend"
+                "C:\\Projects\\dolittle\\Samples\\Basic\\Source\\Web\\babel-plugin-dolittle-extend.js"
             ],
             sourceMaps: true
             //sourceRoot: "../"

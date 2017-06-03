@@ -1,0 +1,8 @@
+﻿{
+    "exclude": [
+        "node_modules",
+        "wwwroot",
+        "bower_components",
+        "jspm_packages"
+    ]
+}

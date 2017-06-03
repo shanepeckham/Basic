@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using doLittle.Applications;
 using doLittle.Configuration;
@@ -10,7 +10,7 @@ namespace Web
         public void Configure(IConfigure configure)
         {
             var basePath = "./EventStore";
-            var entitiesPath = Path.Combine(basePath, "Entities");
+            var entitiesPath = Path.Combine("./", "Entities");
             var eventsPath = Path.Combine(basePath, "Events");
             var eventSequenceNumbersPath = Path.Combine(basePath, "EventSequenceNumbers");
             var eventProcessorsStatePath = Path.Combine(basePath, "EventProcessors");
@@ -34,6 +34,9 @@ namespace Web
                 .Serialization
                     .UsingJson()
 
+                .DefaultStorage
+                    .UsingFiles(entitiesPath)
+                    
                 .Frontend
                     .Web(w =>
                     {

@@ -1,5 +1,5 @@
-class home extends doLittle.views.ViewModel {
-    constructor() {
+﻿class home extends doLittle.views.ViewModel
+{
+    constructor(something) {
     }
 }
-
