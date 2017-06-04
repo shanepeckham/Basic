@@ -4,6 +4,7 @@
         <form action="/Authentication/Challenge" method="POST">
             <button type="submit">Sign In with <span data-bind="text: displayName"></span> (postback)</button>
         </form>
+        <button data-bind="click: $root.signIn.bind($root)">Sign In - SPA - Bearer Token</button>
         <form action="/Authentication/SignOut" method="POST">
             <button type="submit">Sign Out</button>
         </form>
@@ -13,4 +14,3 @@
 
 
 
-<button data-bind="click: signIn">Sign In</button>

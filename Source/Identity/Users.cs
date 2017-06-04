@@ -29,12 +29,11 @@ namespace Identity
                     new Claim(JwtClaimTypes.Email, "admin@internett.com"),
                     new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                     new Claim(JwtClaimTypes.WebSite, "http://www.dolittle.io"),
-                    new Claim(JwtClaimTypes.Role, "admin"),
-                    //new Claim(JwtClaimTypes.Role, "editor"),
-                    //new Claim(JwtClaimTypes.Role, "user"),
                     new Claim(JwtClaimTypes.Address, 
                         @"{ 'street_address': 'one doLittle way', 'locality': 'Sandefjord', 'postal_code': 3230, 'country': 'Norway' }", 
-                        IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json)
+                        IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json),
+                    new Claim("roles", @"['admin', 'editor', 'user']", IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json)
+    
                 }
             });
         }

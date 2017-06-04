@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 // https://github.com/aspnet/Security/tree/dev/samples/OpenIdConnect.AzureAdSample
 // Old: https://github.com/Azure-Samples/active-directory-dotnet-webapp-openidconnect-aspnetcore/blob/master/WebApp-OpenIDConnect-DotNet
@@ -89,11 +91,34 @@ namespace Web
              */
 
             var clientId = "basic";
-            //var clientSecret = "secret";
+            var clientSecret = "secret";
             var authority = "http://localhost:5001";
 
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(clientSecret));
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                Audience = "http://localhost:5000",
+                Authority = authority,
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                RequireHttpsMetadata = false,
+                /*
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = signingKey,
+                    ValidateIssuer = true,
+                    ValidIssuer = "",
+                    ValidateAudience = true,
+                    ValidAudience = "",
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                }*/
+            });
+            
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
@@ -101,7 +126,6 @@ namespace Web
 
                 ClientId = clientId,
                 Authority = authority,
-
                 //AuthenticationScheme = "oidc",
                 //ClientSecret = clientSecret,
                 //ResponseType = OpenIdConnectResponseType.Code,
@@ -135,6 +159,10 @@ namespace Web
                 }
             });
 
+            routeBuilder.MapRoute("Authentication/Identity", context => {
+                
+                return Task.CompletedTask;
+            });
 
             routeBuilder.MapRoute("Authentication/SignOut", async context =>
             {
@@ -226,24 +254,4 @@ OnAuthenticationFailed = context =>
 }*/
 
             /*
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(clientSecret));
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
-            {
-                Audience = "http://localhost:5000",
-                Authority = authority,
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
-                RequireHttpsMetadata = false,
-                TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = signingKey,
-                    ValidateIssuer = true,
-                    ValidIssuer = "",
-                    ValidateAudience = true,
-                    ValidAudience = "",
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
-                }
-            });
             */

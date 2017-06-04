@@ -36,9 +36,12 @@ namespace Identity
                     ClientId = "basic",
                     ClientName = "doLittle Basic Client",
                     AllowedGrantTypes = GrantTypes.ImplicitAndClientCredentials,
+                    AllowAccessTokensViaBrowser = true,
+                    AllowedCorsOrigins = { "http://localhost:5000" },
 
                     RedirectUris = {
-                        "http://localhost:5000/signin-oidc"
+                        "http://localhost:5000/signin-oidc",
+                        "http://localhost:5000/callback.html"
                     },
 
                     ClientSecrets =

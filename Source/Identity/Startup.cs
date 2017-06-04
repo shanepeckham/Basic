@@ -47,6 +47,7 @@ namespace Identity
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("default");
             app.UseIdentityServer();
 
             app.UseStaticFiles();

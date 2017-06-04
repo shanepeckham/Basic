@@ -1,11 +1,19 @@
 class header extends doLittle.views.ViewModel
 {
-    constructor(authenticationSchemes) {
+    constructor(authenticationSchemes, userManager) {
         this.authenticationSchemes = authenticationSchemes.all();
+        this.userManager = userManager;
     }
 
     signIn() {
-        console.log("Signing in");
+        this.userManager.signinRedirect();
+
+        /*
+        this.userManager.getUser().then((user) => {
+            console.log("Hello");
+            debugger;
+
+        });*/
 
     }
 }

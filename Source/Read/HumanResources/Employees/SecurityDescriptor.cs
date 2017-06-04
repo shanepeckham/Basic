@@ -16,7 +16,7 @@ namespace Read.HumanResources.Employees
             var principal = principalResolver.Resolve();
             var currentPrincipal = ClaimsPrincipal.Current;
 
-            var roles = currentPrincipal.FindAll("role");
+            var roles = currentPrincipal.FindAll("roles");
            
             return true;
         }
