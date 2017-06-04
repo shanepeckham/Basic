@@ -37,21 +37,19 @@
 
                 console.log("Filename : "+filename);
 
-
+                var filePath = "";
                 if (filename.lastIndexOf("/") > 0) {
-                    var filePath = filename.substr(0, filename.lastIndexOf("/"));
+                    filePath = filename.substr(0, filename.lastIndexOf("/"));
                     filePath = filePath.split("/").join(".");
-                    namespace = "Web." + filePath;
                 }
 
                 if (filename.lastIndexOf("\\") > 0) {
-                    var filePath = filename.substr(0, filename.lastIndexOf("\\"));
+                    filePath = filename.substr(0, filename.lastIndexOf("\\"));
                     filePath = filePath.split("\\").join(".");
-                    if( filePath.indexOf(".") == 0 ) filePath = filePath.substr(1);
-                    namespace = "Web." + filePath;
                 }
 
-
+                if( filePath.indexOf(".") == 0 ) filePath = filePath.substr(1);
+                namespace = "Web." + filePath;
                 console.log("Namespace : "+namespace);
 
                 var target = path;

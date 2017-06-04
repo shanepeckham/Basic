@@ -2,6 +2,9 @@
 using System.IO;
 using doLittle.Applications;
 using doLittle.Configuration;
+using doLittle.Serialization;
+using doLittle.Web.Read;
+using Microsoft.AspNetCore.Routing;
 
 namespace Web
 {
@@ -26,6 +29,7 @@ namespace Web
                 ))
                 .Events(e =>
                 {
+                    e.EventStore.UsingFiles(eventsPath);
                     e.EventSequenceNumbers.UsingFiles(eventSequenceNumbersPath);
                     e.EventProcessorStates.UsingFiles(eventProcessorsStatePath);
                     e.EventSourceVersions.UsingFiles(eventSourceVersionsPath);
@@ -57,7 +61,7 @@ namespace Web
                         w.NamespaceMapper.Add($"{baseNamespace}.**.", "Events.**.");
                         w.NamespaceMapper.Add($"{baseNamespace}.**.", $"{baseNamespace}.**.");
                     });
-            ;
+
         }
     }
 }

@@ -26,6 +26,9 @@ namespace Web
             if (path.StartsWith("/")) path = path.Substring(1);
             var fullPath = Path.Combine(_env.WebRootPath, path);
             var exists = File.Exists(fullPath);
-            if (!exists && !path.StartsWith("doLittle")) context.HttpContext.Request.Path = "/";
+            if (!exists && 
+                !path.StartsWith("doLittle") &&
+                !path.StartsWith("signin-oidc"))
+                context.HttpContext.Request.Path = "/";
         }
     }}

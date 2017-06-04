@@ -1,0 +1,16 @@
+
+<ul data-bind="foreach: authenticationSchemes">
+    <li>
+        <form action="/Authentication/Challenge" method="POST">
+            <button type="submit">Sign In with <span data-bind="text: displayName"></span> (postback)</button>
+        </form>
+        <form action="/Authentication/SignOut" method="POST">
+            <button type="submit">Sign Out</button>
+        </form>
+        
+    </li>
+</ul>
+
+
+
+<button data-bind="click: signIn">Sign In</button>

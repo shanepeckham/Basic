@@ -23,7 +23,8 @@ export function javaScriptPipeline(stream)
         .pipe(babel({
             presets: ["es2015"],
             plugins: [
-                "C:\\Projects\\dolittle\\Samples\\Basic\\Source\\Web\\babel-plugin-dolittle-extend.js"
+                "/Users/einari/Projects/dolittle/Samples/Basic/Source/Web/babel-plugin-dolittle-extend.js"
+                //"C:\\Projects\\dolittle\\Samples\\Basic\\Source\\Web\\babel-plugin-dolittle-extend.js"
             ],
             sourceMaps: true
             //sourceRoot: "../"

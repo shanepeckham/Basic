@@ -2,7 +2,6 @@
 {
     constructor(register, employees) {
         this.register = register;
-        this.employees = employees;
-        debugger;
+        this.employees = employees.all();
     }
 }

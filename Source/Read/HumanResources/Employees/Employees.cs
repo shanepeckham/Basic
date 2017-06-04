@@ -10,7 +10,6 @@ namespace Read.HumanResources.Employees
         {
             _repository = repository;
         }
-
         public IQueryable<Employee> Query => _repository.Query;
     }
 }
