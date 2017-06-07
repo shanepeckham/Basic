@@ -12,11 +12,12 @@ namespace Read.HumanResources.Employees
 
         public bool IsAuthorized(object securable)
         {
+            
             var principalResolver = Configure.Instance.Container.Get<ICanResolvePrincipal>();
             var principal = principalResolver.Resolve();
-            var currentPrincipal = ClaimsPrincipal.Current;
+            
 
-            var roles = currentPrincipal.FindAll("roles");
+            //var roles = currentPrincipal.FindAll("roles");
            
             return true;
         }
