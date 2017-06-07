@@ -38,6 +38,10 @@ namespace Identity
                     AllowedGrantTypes = GrantTypes.ImplicitAndClientCredentials,
                     AllowAccessTokensViaBrowser = true,
                     AllowedCorsOrigins = { "http://localhost:5000" },
+                    AccessTokenType = AccessTokenType.Jwt,
+                    AccessTokenLifetime = 120,
+                    IdentityTokenLifetime = 120,
+                    AlwaysSendClientClaims = true,
 
                     RedirectUris = {
                         "http://localhost:5000/signin-oidc",
@@ -50,7 +54,10 @@ namespace Identity
                     },
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Address,
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.Phone
                     }
                 }
             };

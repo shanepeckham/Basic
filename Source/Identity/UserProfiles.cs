@@ -5,6 +5,7 @@ using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Extensions;
 using Microsoft.Extensions.Logging;
+using IdentityModel;
 
 namespace Identity
 {
@@ -45,6 +46,8 @@ namespace Identity
                 {
                     if (context.RequestedClaimTypes.Any())
                         context.IssuedClaims.AddRange(context.FilterClaims(user.Claims));
+
+                    context.IssuedClaims.AddRange(user.Claims.Where(c => c.Type == JwtClaimTypes.Role));
                 }
             }
 
