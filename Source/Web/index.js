@@ -6,7 +6,7 @@ class index extends doLittle.views.ViewModel {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", url);
             xhr.onload = function () {
-                log(xhr.status, JSON.parse(xhr.responseText));
+                console.log(xhr.status, xhr.responseText);
             }
             xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
             xhr.send();
