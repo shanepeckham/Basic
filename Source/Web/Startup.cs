@@ -14,37 +14,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-// https://github.com/aspnet/Security/tree/dev/samples/OpenIdConnect.AzureAdSample
-// Old: https://github.com/Azure-Samples/active-directory-dotnet-webapp-openidconnect-aspnetcore/blob/master/WebApp-OpenIDConnect-DotNet
-
-// https://stormpath.com/blog/token-authentication-asp-net-core
-// https://andrewlock.net/a-look-behind-the-jwt-bearer-authentication-middleware-in-asp-net-core/
-// https://blogs.msdn.microsoft.com/webdev/2017/04/06/jwt-validation-and-authorization-in-asp-net-core/
-// https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/
-// http://www.jerriepelser.com/blog/aspnetcore-jwt-saving-bearer-token-as-claim/
-// https://jonhilton.net/2017/05/03/login-authentication-asp-net-core-web-api-big-picture/
-// https://dev.to/samueleresca/developing-token-authentication-using-aspnet-core
-
-// https://damienbod.com/2017/05/06/secure-asp-net-core-mvc-with-angular-using-identityserver4-openid-connect-hybrid-flow/
-// https://github.com/damienbod/AspNet5IdentityServerAngularImplicitFlow
-
-// https://www.itunity.com/article/angular-2-openid-connect-azure-active-directory-3093
-
-// https://channel9.msdn.com/Blogs/Seth-Juarez/Advanced-aspNET-Core-Authorization-with-Barry-Dorrans
-
-// Issues and fixes:
-// https://github.com/aspnet/Security/issues/1068
-
-// https://identityserver4.readthedocs.io/en/release/quickstarts/7_javascript_client.html
-
 namespace Web
 {
     public class Startup
     {
-        AsyncLocal<ClaimsPrincipal> _currentPrincipal = new AsyncLocal<ClaimsPrincipal>();
-        
-
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(sharedOptions =>
@@ -53,6 +26,7 @@ namespace Web
             services.AddRouting();
         }
 
+        AsyncLocal<ClaimsPrincipal> _currentPrincipal = new AsyncLocal<ClaimsPrincipal>();
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Microsoft.Extensions.Logging.LogLevel.Trace);
@@ -84,41 +58,12 @@ namespace Web
                 //LogoutPath = new PathString("/signout")
             });
 
-            /*
-            var clientId = "413d84a8-57f9-4d05-bbf3-a584a7d4985c";
-            var clientSecret = "FTpuf9zzf72sK/5VxMdsjTXR21wdD+52RH5JFMCJMoI=";
-            var authority = "https://login.windows.net/dolittledemo.onmicrosoft.com";
-             */
 
             var clientId = "basic";
             var clientSecret = "secret";
             var authority = "http://localhost:5001";
 
-
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(clientSecret));
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
-            {
-                Audience = "http://localhost:5000",
-                Authority = authority,
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
-                RequireHttpsMetadata = false,
-                /*
-                TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = signingKey,
-                    ValidateIssuer = true,
-                    ValidIssuer = "",
-                    ValidateAudience = true,
-                    ValidAudience = "",
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
-                }*/
-            });
-            
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
@@ -126,6 +71,8 @@ namespace Web
 
                 ClientId = clientId,
                 Authority = authority,
+                GetClaimsFromUserInfoEndpoint = true,
+                
                 //AuthenticationScheme = "oidc",
                 //ClientSecret = clientSecret,
                 //ResponseType = OpenIdConnectResponseType.Code,
@@ -133,17 +80,21 @@ namespace Web
                 SaveTokens = true
             });
 
-            app.Use(async (context, next) =>
+            /*
+            if( ClaimsPrincipal.ClaimsPrincipalSelector == null )
             {
-                _currentPrincipal.Value = context.User;
-                await next();
-            });
-            ClaimsPrincipal.ClaimsPrincipalSelector = () => _currentPrincipal.Value;
+                app.Use(async (context, next) =>
+                {
+                    _currentPrincipal.Value = context.User;
+                    await next();
+                });
+                ClaimsPrincipal.ClaimsPrincipalSelector = () => _currentPrincipal.Value;
+            }*/
+            
 
             app.UsedoLittle(env);
 
             var routeBuilder = new RouteBuilder(app);
-
             routeBuilder.MapRoute("Authentication/Challenge", async context =>
             {
                 if (!context.User.Identities.Any(identity => identity.IsAuthenticated))
@@ -175,6 +126,31 @@ namespace Web
         }
     }
 }
+
+
+// https://github.com/aspnet/Security/tree/dev/samples/OpenIdConnect.AzureAdSample
+// Old: https://github.com/Azure-Samples/active-directory-dotnet-webapp-openidconnect-aspnetcore/blob/master/WebApp-OpenIDConnect-DotNet
+
+// https://stormpath.com/blog/token-authentication-asp-net-core
+// https://andrewlock.net/a-look-behind-the-jwt-bearer-authentication-middleware-in-asp-net-core/
+// https://blogs.msdn.microsoft.com/webdev/2017/04/06/jwt-validation-and-authorization-in-asp-net-core/
+// https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/
+// http://www.jerriepelser.com/blog/aspnetcore-jwt-saving-bearer-token-as-claim/
+// https://jonhilton.net/2017/05/03/login-authentication-asp-net-core-web-api-big-picture/
+// https://dev.to/samueleresca/developing-token-authentication-using-aspnet-core
+
+// https://damienbod.com/2017/05/06/secure-asp-net-core-mvc-with-angular-using-identityserver4-openid-connect-hybrid-flow/
+// https://github.com/damienbod/AspNet5IdentityServerAngularImplicitFlow
+
+// https://www.itunity.com/article/angular-2-openid-connect-azure-active-directory-3093
+
+// https://channel9.msdn.com/Blogs/Seth-Juarez/Advanced-aspNET-Core-Authorization-with-Barry-Dorrans
+
+// Issues and fixes:
+// https://github.com/aspnet/Security/issues/1068
+
+// https://identityserver4.readthedocs.io/en/release/quickstarts/7_javascript_client.html
+
 
 /*
 app.Run(async context =>
@@ -254,4 +230,24 @@ OnAuthenticationFailed = context =>
 }*/
 
             /*
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(clientSecret));
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                Audience = "http://localhost:5000",
+                Authority = authority,
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                RequireHttpsMetadata = false,
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = signingKey,
+                    ValidateIssuer = true,
+                    ValidIssuer = "",
+                    ValidateAudience = true,
+                    ValidAudience = "",
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                }
+            });
             */
