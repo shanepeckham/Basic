@@ -19,6 +19,10 @@ bower_components
 # Web
 wwwroot
 
+# doLittle Specific
+EventStore
+Entities
+
 # OS generated files #
 ######################
 .DS_Store
