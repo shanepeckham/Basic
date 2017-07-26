@@ -1,6 +1,7 @@
 class index extends doLittle.views.ViewModel {
     constructor(userManager) {
         userManager.getUser().then(user => {
+            if( !user ) return;
             var url = "http://localhost:5000/Authentication/Identity";
 
             var xhr = new XMLHttpRequest();
