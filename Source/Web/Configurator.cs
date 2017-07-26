@@ -18,7 +18,7 @@ namespace Web
             var eventSequenceNumbersPath = Path.Combine(basePath, "EventSequenceNumbers");
             var eventProcessorsStatePath = Path.Combine(basePath, "EventProcessors");
             var eventSourceVersionsPath = Path.Combine(basePath, "EventSourceVersions");
-
+            
             configure
                 .Application("Basic", a => a.Structure(s => s
                         .Domain("Domain.{BoundedContext}.-{Module}.-{Feature}.^{SubFeature}*")
