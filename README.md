@@ -4,7 +4,7 @@ This is a very basic [doLittle](http://www.dolittle.io) sample.
 
 ## Prerequisites
 
-You will need to have [.NET Core](https://www.microsoft.com/net/download/core) and [NodeJS](http://nodejs.org/) installed.
+You will need to have [.NET Core](https://www.microsoft.com/net/download/core), [NodeJS](http://nodejs.org/) and [gulp](https://gulpjs.com) installed.
 
 ## Identity
 
